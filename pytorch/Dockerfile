@@ -119,7 +119,11 @@ RUN set -ex; \
 
 RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu80/torch-0.3.1-cp36-cp36m-linux_x86_64.whl
 RUN pip --no-cache-dir install --upgrade torchvision
+
 RUN pip --no-cache-dir install --upgrade requests
-RUN pip --no-cache-dir install --upgrade scapy
+RUN pip --no-cache-dir install --upgrade future
+RUN pip --no-cache-dir install --upgrade spacy
+RUN pip --no-cache-dir install --upgrade consoleprinter
+RUN pip --no-cache-dir install --upgrade pyyaml
 
 CMD ["/bin/bash"]
