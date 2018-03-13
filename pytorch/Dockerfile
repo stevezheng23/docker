@@ -39,6 +39,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-get update && apt-get install -y --no-install-recommends \
         tcl \
         tk \
+        vim \
         build-essential checkinstall \
         libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev \
     && rm -rf /var/lib/apt/lists/*
@@ -118,5 +119,7 @@ RUN set -ex; \
 
 RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu80/torch-0.3.1-cp36-cp36m-linux_x86_64.whl
 RUN pip --no-cache-dir install --upgrade torchvision
+RUN pip --no-cache-dir install --upgrade requests
+RUN pip --no-cache-dir install --upgrade scapy
 
 CMD ["/bin/bash"]
