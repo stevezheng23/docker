@@ -8,10 +8,39 @@ ENV PATH /usr/local/bin:$PATH
 # > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
 ENV LANG C.UTF-8
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        wget \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN set -ex; \
+    if ! command -v gpg > /dev/null; then \
+        apt-get update; \
+        apt-get install -y --no-install-recommends \
+            gnupg \
+            dirmngr \
+        ; \
+        rm -rf /var/lib/apt/lists/*; \
+    fi
+
+# procps is very common in build systems, and is a reasonably small package
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        bzr \
+        git \
+        mercurial \
+        openssh-client \
+        subversion \
+        \
+        procps \
+    && rm -rf /var/lib/apt/lists/*
+
 # runtime dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
         tcl \
         tk \
+        build-essential checkinstall \
+        libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev \
     && rm -rf /var/lib/apt/lists/*
 
 ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
