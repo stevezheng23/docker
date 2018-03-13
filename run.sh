@@ -1,0 +1,1 @@
+nvidia-docker run --rm -it [namespace]/pytorch:latest-gpu_cuda8_cudnn6-torch0.3.1-python3.6
