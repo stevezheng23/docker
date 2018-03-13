@@ -116,7 +116,7 @@ RUN set -ex; \
         \) -exec rm -rf '{}' +; \
     rm -f get-pip.py
 
-CMD ["python3"]
-
 RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu80/torch-0.3.1-cp36-cp36m-linux_x86_64.whl
 RUN pip --no-cache-dir install --upgrade torchvision
+
+CMD ["/bin/bash"]
