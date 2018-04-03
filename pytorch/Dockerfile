@@ -127,4 +127,6 @@ RUN pip --no-cache-dir install --upgrade spacy
 RUN pip --no-cache-dir install --upgrade consoleprinter
 RUN pip --no-cache-dir install --upgrade pyyaml
 
+RUN python -m spacy download en
+
 CMD ["/bin/bash"]
