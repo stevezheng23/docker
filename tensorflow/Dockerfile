@@ -43,6 +43,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         gcc g++ \
         build-essential checkinstall \
         libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev \
+        zip unzip \
     && rm -rf /var/lib/apt/lists/*
 
 ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
@@ -120,6 +121,8 @@ RUN set -ex; \
 
 RUN pip --no-cache-dir install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.4.0-cp36-cp36m-linux_x86_64.whl
 
+RUN pip --no-cache-dir install --upgrade jinja2
+RUN pip --no-cache-dir install --upgrade tqdm
 RUN pip --no-cache-dir install --upgrade nltk
 RUN python -m nltk.downloader all
 
