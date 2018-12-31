@@ -123,10 +123,13 @@ RUN pip --no-cache-dir install --upgrade torchvision
 
 RUN pip --no-cache-dir install --upgrade requests
 RUN pip --no-cache-dir install --upgrade future
-RUN pip --no-cache-dir install --upgrade spacy
 RUN pip --no-cache-dir install --upgrade consoleprinter
 RUN pip --no-cache-dir install --upgrade pyyaml
 
+RUN pip --no-cache-dir install --upgrade nltk
+RUN python -m nltk.downloader all
+
+RUN pip --no-cache-dir install --upgrade spacy
 RUN python -m spacy download en
 
 CMD ["/bin/bash"]
