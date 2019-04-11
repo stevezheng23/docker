@@ -1,6 +1,9 @@
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 MAINTAINER Steve Zheng "stevezheng23@gmail.com"
 
+# set debian frontend as non-interactive
+ENV DEBIAN_FRONTEND=noninteractive
+
 # ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
 
