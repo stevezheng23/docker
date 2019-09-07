@@ -130,4 +130,6 @@ RUN python -m nltk.downloader all
 RUN pip --no-cache-dir install --upgrade spacy
 RUN python -m spacy download en
 
+RUN pip --no-cache-dir install --upgrade sentencepiece
+
 CMD ["/bin/bash"]
