@@ -1,5 +1,8 @@
-FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
+FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 MAINTAINER Steve Zheng "stevezheng23@gmail.com"
+
+# set debian frontend as non-interactive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
@@ -43,6 +46,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         gcc g++ \
         build-essential checkinstall \
         libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev \
+        zip unzip \
     && rm -rf /var/lib/apt/lists/*
 
 ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
@@ -97,7 +101,7 @@ RUN cd /usr/local/bin \
     && ln -s python3-config python-config
 
 # if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
-ENV PYTHON_PIP_VERSION 9.0.1
+ENV PYTHON_PIP_VERSION 19.0.3
 
 RUN set -ex; \
     \
@@ -118,18 +122,21 @@ RUN set -ex; \
         \) -exec rm -rf '{}' +; \
     rm -f get-pip.py
 
-RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu80/torch-0.3.1-cp36-cp36m-linux_x86_64.whl
+RUN pip --no-cache-dir install --upgrade https://download.pytorch.org/whl/cu100/torch-1.2.0-cp36-cp36m-manylinux1_x86_64.whl
 RUN pip --no-cache-dir install --upgrade torchvision
-
-RUN pip --no-cache-dir install --upgrade requests
-RUN pip --no-cache-dir install --upgrade future
-RUN pip --no-cache-dir install --upgrade consoleprinter
-RUN pip --no-cache-dir install --upgrade pyyaml
 
 RUN pip --no-cache-dir install --upgrade nltk
 RUN python -m nltk.downloader all
 
 RUN pip --no-cache-dir install --upgrade spacy
 RUN python -m spacy download en
+
+RUN pip --no-cache-dir install --upgrade boto3
+RUN pip --no-cache-dir install --upgrade regex
+RUN pip --no-cache-dir install --upgrade requests
+RUN pip --no-cache-dir install --upgrade sacremoses
+RUN pip --no-cache-dir install --upgrade sentencepiece
+RUN pip --no-cache-dir install --upgrade tqdm
+RUN pip --no-cache-dir install --upgrade sentencepiece
 
 CMD ["/bin/bash"]
