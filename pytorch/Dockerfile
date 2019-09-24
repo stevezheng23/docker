@@ -125,6 +125,8 @@ RUN set -ex; \
 RUN pip --no-cache-dir install --upgrade https://download.pytorch.org/whl/cu100/torch-1.2.0-cp36-cp36m-manylinux1_x86_64.whl
 RUN pip --no-cache-dir install --upgrade torchvision
 
+RUN pip --no-cache-dir install --upgrade pytorch-transformers
+
 RUN pip --no-cache-dir install --upgrade nltk
 RUN python -m nltk.downloader all
 
