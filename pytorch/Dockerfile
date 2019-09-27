@@ -125,6 +125,7 @@ RUN set -ex; \
 RUN pip --no-cache-dir install --upgrade https://download.pytorch.org/whl/cu100/torch-1.2.0-cp36-cp36m-manylinux1_x86_64.whl
 RUN pip --no-cache-dir install --upgrade torchvision
 
+RUN pip --no-cache-dir install --upgrade fairseq
 RUN pip --no-cache-dir install --upgrade pytorch-transformers
 
 RUN pip --no-cache-dir install --upgrade nltk
@@ -139,6 +140,5 @@ RUN pip --no-cache-dir install --upgrade requests
 RUN pip --no-cache-dir install --upgrade sacremoses
 RUN pip --no-cache-dir install --upgrade sentencepiece
 RUN pip --no-cache-dir install --upgrade tqdm
-RUN pip --no-cache-dir install --upgrade sentencepiece
 
 CMD ["/bin/bash"]
