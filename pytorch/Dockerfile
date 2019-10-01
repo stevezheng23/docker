@@ -126,7 +126,8 @@ RUN pip --no-cache-dir install --upgrade https://download.pytorch.org/whl/cu100/
 RUN pip --no-cache-dir install --upgrade torchvision
 
 RUN pip --no-cache-dir install --upgrade fairseq
-RUN pip --no-cache-dir install --upgrade pytorch-transformers
+RUN pip --no-cache-dir install --upgrade tensorboardX
+RUN pip --no-cache-dir install --upgrade transformers
 
 RUN pip --no-cache-dir install --upgrade nltk
 RUN python -m nltk.downloader all
