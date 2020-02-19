@@ -40,4 +40,7 @@ RUN pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="-
 WORKDIR /
 RUN rm -r /tmp/
 
+RUN ln -s /usr/bin/python3 /usr/bin/python & \
+    ln -s /usr/bin/pip3 /usr/bin/pip
+
 CMD ["/bin/bash"]
