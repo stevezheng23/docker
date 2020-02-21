@@ -24,20 +24,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN ln -s /usr/bin/python3 /usr/bin/python & \
-    ln -s /usr/bin/pip3 /usr/bin/pip
+RUN rm -f /usr/bin/python && ln -s /usr/bin/python /usr/bin/python3
+RUN rm -f /usr/bin/pip && ln -s /usr/bin/pip /usr/bin/pip3
 
 RUN pip --no-cache-dir install --upgrade setuptools
 RUN pip --no-cache-dir install --upgrade torch===1.4.0 torchvision===0.5.0 -f https://download.pytorch.org/whl/torch_stable.html
 
 RUN pip --no-cache-dir install --upgrade boto3 regex requests sacremoses sentencepiece tqdm
 RUN pip --no-cache-dir install --upgrade transformers tensorboardX
-
-WORKDIR /tmp/nvidia_apex
-RUN git clone https://github.com/NVIDIA/apex.git
-WORKDIR /tmp/nvidia_apex/apex
-RUN pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" .
-WORKDIR /
-RUN rm -r /tmp/
 
 CMD ["/bin/bash"]
