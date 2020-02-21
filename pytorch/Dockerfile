@@ -24,8 +24,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN rm -f /usr/bin/python && ln -s /usr/bin/python /usr/bin/python3
-RUN rm -f /usr/bin/pip && ln -s /usr/bin/pip /usr/bin/pip3
+RUN rm -f /usr/bin/python && ln -s /usr/bin/python3 /usr/bin/python
+RUN rm -f /usr/bin/pip && ln -s /usr/bin/pip3 /usr/bin/pip
 
 RUN pip --no-cache-dir install --upgrade setuptools
 RUN pip --no-cache-dir install --upgrade torch===1.4.0 torchvision===0.5.0 -f https://download.pytorch.org/whl/torch_stable.html
