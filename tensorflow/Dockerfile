@@ -1,5 +1,6 @@
 FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
-MAINTAINER Steve Zheng "stevezheng23@gmail.com"
+LABEL author.name="Steve Zheng"
+LABEL author.email="stevezheng23@gmail.com"
 
 # set debian frontend as non-interactive
 ENV DEBIAN_FRONTEND=noninteractive
