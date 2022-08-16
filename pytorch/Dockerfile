@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.2-cudnn8-devel-ubuntu18.04
+FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu20.04
 LABEL author.name="Steve Zheng"
 LABEL author.email="stevezheng23@gmail.com"
 
@@ -17,27 +17,27 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         openssh-client \
         gcc g++ \
         zip unzip \
+        software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
+RUN add-apt-repository ppa:deadsnakes/ppa
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        python3.8 \
-        python3-pip \
-        python3-dev \
+        python3.9 \
+        python3.9-dev \
+        python3.9-distutils \
     && rm -rf /var/lib/apt/lists/*
+
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+RUN python3.9 get-pip.py && rm get-pip.py
 
 RUN rm -f /usr/bin/python && ln -s /usr/bin/python3 /usr/bin/python
 RUN rm -f /usr/bin/pip && ln -s /usr/bin/pip3 /usr/bin/pip
 
-RUN pip --no-cache-dir install --upgrade setuptools
-RUN pip --no-cache-dir install --upgrade torch===1.11.0 torchvision===0.12.0 torchaudio===0.11.0
+RUN pip --no-cache-dir install --upgrade setuptools wheel
+RUN pip --no-cache-dir install --upgrade torch===1.10.1 torchvision===0.11.2 torchaudio===0.10.1
 
 RUN pip --no-cache-dir install --upgrade boto3 regex requests sacremoses sentencepiece tqdm
-RUN pip --no-cache-dir install --upgrade datasets, transformers tensorboardX
-
-RUN pip --no-cache-dir install --upgrade nltk
-RUN python -m nltk.downloader all
-
-RUN pip --no-cache-dir install --upgrade spacy
-RUN python -m spacy download en
+RUN pip --no-cache-dir install --upgrade datasets transformers tensorboardX
 
 CMD ["/bin/bash"]
