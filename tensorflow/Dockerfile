@@ -35,12 +35,10 @@ RUN rm -f /usr/bin/python3 && ln -s /usr/bin/python3.9 /usr/bin/python3
 RUN rm -f /usr/bin/python && ln -s /usr/bin/python3 /usr/bin/python
 RUN rm -f /usr/bin/pip && ln -s /usr/bin/pip3 /usr/bin/pip
 
-RUN pip --no-cache-dir install --upgrade setuptools
+RUN pip --no-cache-dir install --upgrade setuptools wheel
 RUN pip --no-cache-dir install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-2.9.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
 
-RUN pip --no-cache-dir install --upgrade sentencepiece tqdm
-
-RUN pip --no-cache-dir install --upgrade spacy
-RUN python -m spacy download en
+RUN pip --no-cache-dir install --upgrade boto3 regex requests sacremoses sentencepiece tqdm
+RUN pip --no-cache-dir install --upgrade nltk spacy datasets transformers
 
 CMD ["/bin/bash"]
